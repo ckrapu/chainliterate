@@ -1,0 +1,27 @@
+.chainlit/translations
+# Ignore root-level Chainlit translations directory
+*/.chainlit/translations
+
+*/volumes/postgres/*
+*/postgres/global/*
+*/postgres/*
+!*/postgres/.gitkeep
+
+*/migration_lock.toml
+
+
+*/.data/postgres/*
+# Ignore contents of root-level postgres directory, keep the dir
+/postgres/*
+# Ignore contents of root-level volumes directory, keep the dir
+/volumes/*
+volumes/postgres/*
+*.egg-info
+
+.DS_Store
+
+uv.lock
+*/.env
+
+__pycache__
+*.pyc
