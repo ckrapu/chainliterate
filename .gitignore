@@ -9,6 +9,9 @@
 
 */migration_lock.toml
 
+# If the chainlit repo is available here for reference
+# by a coding agent, don't include it in the project repo
+/chainlit
 
 */.data/postgres/*
 # Ignore contents of root-level postgres directory, keep the dir
@@ -25,3 +28,5 @@ uv.lock
 
 __pycache__
 *.pyc
+
+.notes.md

@@ -2,9 +2,12 @@ import os
 import logging
 
 import chainlit as cl
+from chainlit.data.chainlit_data_layer import ChainlitDataLayer
+from chainlit.data.storage_clients.s3 import S3StorageClient
 from openai import AsyncOpenAI
 import httpx
 from dotenv import load_dotenv
+from typing import Optional, Dict
 from dataclasses import dataclass
 
 
@@ -37,6 +40,15 @@ if config.api_key:
 else:
     raise ValueError("OPENROUTER_API_KEY environment variable is required")
 logger.info(f"using OpenRouter base URL: {config.base_url} for model {config.model}")
+
+@cl.oauth_callback
+def oauth_callback(
+  provider_id: str,
+  token: str,
+  raw_user_data: Dict[str, str],
+  default_user: cl.User,
+) -> Optional[cl.User]:
+  return default_user
 
 @cl.on_chat_start
 async def on_chat_start():
