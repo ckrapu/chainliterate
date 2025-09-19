@@ -1,0 +1,56 @@
+direction: right
+
+User: {
+  label: "User Client"
+}
+
+server: {
+  label: "App Server"
+
+  web: {
+    label: "Application Web Server"
+  }
+  backend: {
+    label: "Backend Server"
+  }
+}
+
+sql: {
+  label: "PostgreSQL"
+  icon: "https://icons.terrastruct.com/essentials%2F117-database.svg"
+}
+blob: {
+    label: "Blob Storage"
+    icon: "https://icons.terrastruct.com/aws%2FStorage%2FAmazon-Simple-Storage-Service-S3.svg"
+}
+
+oauth2: {
+  label: "GCP OAuth2 Server"
+}
+
+openrouter: {
+  label: "OpenRouter"
+
+  router: "LLM Router"
+}
+
+llm: {
+  label: "3rd party LLMs"
+  style: {
+    multiple: true
+    }
+  }
+
+User -> server.web: "Access via browser"
+User -> server.backend: "Web app API calls"
+User -> oauth2: "OAuth2 (auth/callback)"
+server.backend -> oauth2: "OAuth2 (auth/callback)"
+server.backend -> openrouter.router: "LLM requests"
+server.backend -> sql: "User history"
+server.backend -> blob: "Unstructured app data"
+
+openrouter.router -> llm: "Chat Completions"
+
+style: {
+      multiple: true
+    }
