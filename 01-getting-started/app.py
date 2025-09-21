@@ -11,7 +11,6 @@ from dataclasses import dataclass
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("chainliterate")
 
-
 load_dotenv()
 
 @dataclass
@@ -29,14 +28,6 @@ class AppConfig:
 
 config = AppConfig()
 
-
-
-
-if config.api_key:
-    logger.info("OPENROUTER_API_KEY ending in " + config.api_key[-2:] + " detected")
-else:
-    raise ValueError("OPENROUTER_API_KEY environment variable is required")
-logger.info(f"using OpenRouter base URL: {config.base_url} for model {config.model}")
 
 @cl.on_chat_start
 async def on_chat_start():
@@ -86,8 +77,6 @@ async def on_message(message: cl.Message):
                 await msg.stream_token(token)
 
         await msg.update()
-        history.append({"role": "assistant", "content": msg.content})
-        cl.user_session.set("history", history)
 
 
 @cl.on_chat_end
@@ -95,7 +84,6 @@ async def on_chat_end():
     '''
     Perform any cleanup actions needed at the end of a chat session.
     '''
-    logging.info(f"Chat ended for session{cl.user_session.get('id')}")
     try:
         client = cl.user_session.get("oai_client")
         if client:

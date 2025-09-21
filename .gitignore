@@ -31,3 +31,6 @@ __pycache__
 
 .notes.md
 .private
+
+*/app_completed.py # Don't track version with the completed exercises
+01-getting-started/app_completed.py
