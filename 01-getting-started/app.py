@@ -22,8 +22,6 @@ class AppConfig:
     referrer: str = "http://localhost"
     title: str = "chainliterate"
     system_prompt: str = "You are chainliterate, a helpful, concise assistant."
-    ref: str = "http://localhost"
-    title: str = "chainliterate"
     httpx_timeout_s: int = 300  # Timeout for HTTPX client in seconds
 
 config = AppConfig()
@@ -89,4 +87,4 @@ async def on_chat_end():
         if client:
             await client.close()
     except Exception as e:
-        logging.warning(f"Error closing OpenAI client: {e}")
+        logger.warning(f"Error closing OpenAI client: {e}")
