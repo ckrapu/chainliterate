@@ -1,14 +1,12 @@
 # Overview
-`chainliterate` is a proof-of-concept for a platform built on open souce code and components to provide artificial intelligence as a public good and respecting data privacy requirements.
+`chainliterate` is a teaching repository for how to build a robust AI-based chat platform using simple, well-chosen pieces of software and infrastructure using the Chainlit software package as its core.
 
-The core architecture of this repository involves several pieces:
-- Currently, large language model (LLM) inference is handled using OpenRouter to connect to a range of vendors.
-- The user interface and application logic is provided by [Chainlit](https://docs.chainlit.io/get-started/overview)
-- Data persistence and storage is managed by AWS Aurora and Amazon S3
-- The site is hosted on AWS Amplify
+Each chapter in this repository builds upon the previous one, gradually working up to a fully production-ready system with a number of features which makes it manageable to deploy such a system with a small team or single engineer.
 
 # Getting started
-This project targets macOS and Linux. Use `uv` to manage Python, virtual environments, and dependencies.
+This project targets macOS and Linux. It may work on Windows, but has not been tested. Use `uv` to manage Python, virtual environments, and dependencies. Ypu will also need Docker to complete all the chapters in this project; you can find the installation instructions [here](https://docs.docker.com/engine/install/).
+
+You will also need to get an OpenRouter API key for all chapters and an AWS account to finish the later chapters.
 
 ## Installing uv
 - macOS (Homebrew): `brew install uv`

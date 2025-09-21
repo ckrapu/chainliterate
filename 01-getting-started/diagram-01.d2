@@ -1,0 +1,72 @@
+direction: right
+user: {
+  label: User
+  icon: "https://icons.terrastruct.com/essentials%2F365-user.svg"
+  style.shadow: true
+  style.multiple: false
+}
+
+backend: {
+  label: App Backend
+  style.3d: true
+  style.shadow: true
+  style.double-border: false
+  label.near: outside-top-center
+  FastAPI.style.shadow: true
+  Uvicorn.style.shadow: true
+  Chainlit App.style.shadow: true
+  Uvicorn.style.multiple: false
+  FastAPI.style.multiple: false
+  style.multiple: false
+  Chainlit App.style.multiple: false
+}
+
+backend.Uvicorn -> backend.FastAPI -> backend.Chainlit App
+(backend.FastAPI -> backend.Chainlit App)[0].style.multiple: false
+
+(backend.Uvicorn -> backend.FastAPI)[0].style.multiple: false
+
+(backend.Uvicorn -> backend.FastAPI)[0].style.shadow: true
+
+(backend.FastAPI -> backend.Chainlit App)[0].style.shadow: true
+
+backend.Chainlit App -> OpenRouter: LLM Completions {
+  style.shadow: true
+  style.multiple: false
+}
+
+frontend: {
+  label: React Web App
+  style.3d: false
+  style.shadow: true
+  style.multiple: false
+}
+frontend -> backend.uvicorn: WS / REST {
+  style.shadow: true
+  style.multiple: false
+}
+user -> frontend: Browser {
+  style.shadow: true
+  style.multiple: false
+}
+
+OpenRouter -> Anthropic: {
+  style.shadow: true
+  style.multiple: false
+}
+OpenRouter -> OpenAI: {
+  style.shadow: true
+  style.multiple: false
+}
+OpenRouter -> "...": {
+  style.shadow: true
+  style.multiple: false
+}
+Anthropic.style.multiple: true
+OpenAI.style.multiple: true
+"...".style.multiple: true
+"...".style.shadow: true
+OpenAI.style.shadow: true
+OpenRouter.style.shadow: true
+Anthropic.style.shadow: true
+OpenRouter.style.multiple: false
