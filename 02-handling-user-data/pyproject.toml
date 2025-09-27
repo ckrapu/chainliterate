@@ -9,6 +9,7 @@ dependencies = [
     "boto3",
     "chainlit>=1.0.0",
     "httpx>=0.27",
+    "invoke",
     "pytest-asyncio",
     "python-dotenv>=1.0",
     "openai>=1.40.0",

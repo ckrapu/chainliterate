@@ -1,0 +1,108 @@
+direction: right
+***.style.shadow: true
+
+user: {
+  label: User
+  icon: "https://icons.terrastruct.com/essentials%2F365-user.svg"
+  style.multiple: false
+}
+
+backend: {
+  label: App Backend
+  label.near: outside-top-center
+  style: {
+    3d: true
+    double-border: false
+    multiple: false
+  }
+  Uvicorn.style.multiple: false
+  FastAPI.style.multiple: false
+  Chainlit App.style.multiple: false
+}
+
+Container1: {
+  label: Container
+  PostgreSQL
+}
+
+Container2: {
+  label: Container
+  LocalStack
+}
+
+oauth: {
+  label: GCP OAuth
+  style.opacity: 0.5
+}
+
+cli: {
+  label: Admin CLI
+}
+
+oauth -> frontend
+oauth -> backend
+
+backend.Chainlit App <-> Container1.PostgreSQL
+backend.Chainlit App <-> Container2.LocalStack
+
+cli -> Container1.PostgreSQL
+
+backend.Uvicorn -> backend.FastAPI -> backend.Chainlit App
+(backend.FastAPI -> backend.Chainlit App)[0].style.multiple: false
+(backend.Uvicorn -> backend.FastAPI)[0].style.multiple: false
+
+backend.Chainlit App -> OpenRouter: LLM Completions {
+  style.multiple: false
+}
+
+frontend: {
+  label: React Web App
+  style: {
+    3d: false
+    multiple: false
+  }
+}
+frontend -> backend.Uvicorn: WS / REST {
+  style.multiple: false
+}
+user -> frontend: Browser {
+  style.multiple: false
+}
+
+OpenRouter: {
+  style: {
+    opacity: 0.5
+    multiple: false
+  }
+}
+
+Anthropic: {
+  style: {
+    multiple: true
+    opacity: 0.5
+  }
+}
+
+OpenAI: {
+  style: {
+    multiple: true
+    opacity: 0.5
+  }
+}
+
+"...": {
+  style: {
+    multiple: true
+    opacity: 0.5
+  }
+}
+
+OpenRouter -> Anthropic: {
+  style.multiple: false
+}
+OpenRouter -> OpenAI: {
+  style.multiple: false
+}
+OpenRouter -> "...": {
+  style.multiple: false
+}

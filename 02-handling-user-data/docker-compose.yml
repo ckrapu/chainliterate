@@ -22,6 +22,8 @@ services:
       retries: 10
     restart: unless-stopped
 
+  
+
   localstack:
     image: localstack/localstack:latest
     environment:

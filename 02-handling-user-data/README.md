@@ -1,27 +1,27 @@
 # Overview
-`chainliterate` is a teaching repository for how to build a robust AI-based chat platform using simple, well-chosen pieces of software and infrastructure using the Chainlit software package as its core.
+This chapter focuses on handling user data across sessions while keeping the app simple to run locally. You will run a Chainlit app backed by Postgres (via Docker), and use OpenRouter for model access. To enable persistence across sessions, Chainlit requires a PostgreSQL database, a blob storage resource, and credentials for an OAuth2 client. We'll work on enabling data persistence in this chapter.
 
-Each chapter in this repository builds upon the previous one, gradually working up to a fully production-ready system with a number of features which makes it manageable to deploy such a system with a small team or single engineer.
+# Prerequisites
+- Docker and Docker Compose installed
+- `uv` installed for Python env + dependency management
+- An OpenRouter API key
+- A Google Cloud Platform OAuth client set up [(instructions here)](https://support.google.com/cloud/answer/15549257?hl=en); you should have values available for `OAUTH_GOOGLE_CLIENT_ID` and 
+`OAUTH_GOOGLE_CLIENT_SECRET`.
 
-# Getting started
-This project targets macOS and Linux. It may work on Windows, but has not been tested. Use `uv` to manage Python, virtual environments, and dependencies. Ypu will also need Docker to complete all the chapters in this project; you can find the installation instructions [here](https://docs.docker.com/engine/install/).
+# Environment Setup
+- From the project root, copy the example env file and set secrets:
+  - `cp .env.example .env`
+  - Open `.env` and set `OPENROUTER_API_KEY` (required)
+  - Set/confirm:
+    - `CHAINLIT_AUTH_SECRET` (you can generate one with `chainlit create-secret`)
+    - `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB` (default DB is `chainliterate_db`)
+    - `DATABASE_URL` should match your Postgres settings
+- Create a virtual environment with the following commands:
+  - `uv venv`
+  - `source .venv/bin/activate`
+  - `uv sync`
+- Start Postgres and LocalStack for mimicking AWS S3 with `docker compose up`
 
-You will also need to get an OpenRouter API key for all chapters and an AWS account to finish the later chapters.
+After finishing these steps, you can run the app in hot reload mode with `uv run chainlit run app.py -w` and you should be greeted with a login page.
 
-## Installing uv
-- macOS (Homebrew): `brew install uv`
-- macOS/Linux (official script): `curl -LsSf https://astral.sh/uv/install.sh | sh`
-- Verify: `uv --version`
-
-If the script install doesn’t put `uv` on your PATH, add `~/.local/bin` to your PATH (e.g., `export PATH="$HOME/.local/bin:$PATH"`).
-
-## Creating a virtual environment
-- From the project root: `uv venv`
-- Activate (optional; `uv` can run commands without activation):
-  - macOS/Linux (bash/zsh): `source .venv/bin/activate`
-
-## Installing dependencies
-`uv sync`
-  - Adds missing dependencies and locks them; re-run after changes.
-
-Tip: To add a new runtime dependency: `uv add <package>`; for dev-only: `uv add --dev <package>`.
+# Exercises
